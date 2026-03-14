@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
       theme: MyAppTheme.lightTheme.copyWith(
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: MyColors.primary,
-          selectionColor: Color(0x80368d9c),
+          selectionColor: Color(0x40369EFF),
           selectionHandleColor: MyColors.primary,
         ),
       ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sss/core/routes/app_routes.dart';
+import 'package:sss/views/auth/signin_screen.dart';
+import 'package:sss/views/auth/signup_screen.dart';
 import 'package:sss/views/splash_screen.dart';
 
 /// App route paths (match [AppRoutes] for consistency).
+/// Flow: splash → signin → signup.
 final class AppRouter {
   AppRouter._();
 
@@ -17,8 +20,18 @@ final class AppRouter {
         builder: (BuildContext context, GoRouterState state) =>
             const SplashScreen(),
       ),
-      // Add more routes here, e.g.:
-      // GoRoute(path: AppRoutes.home, name: 'home', builder: (_, state) => const HomeScreen()),
+      GoRoute(
+        path: AppRoutes.signin,
+        name: 'signin',
+        builder: (BuildContext context, GoRouterState state) =>
+            const SigninScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.signup,
+        name: 'signup',
+        builder: (BuildContext context, GoRouterState state) =>
+            const SignupScreen(),
+      ),
     ],
   );
 }

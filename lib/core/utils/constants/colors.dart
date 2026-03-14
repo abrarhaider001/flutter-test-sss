@@ -1,79 +1,48 @@
 import 'package:flutter/material.dart';
 
 class MyColors {
-  // App theme colors (aligned with Equifeed logo: green "Equi", orange "feed")
-  static const Color primary = Color(
-    0xFF2E8B57,
-  ); // Equifeed green (Equi text, foliage)
-  static const Color primaryLight = Color(
-    0xFF3CB371,
-  ); // Lighter green highlight
-  static const Color primaryDark = Color(0xFF006400); // Dark forest green
+  // Primary accent (active elements, links, filled state) – reference blue
+  static const Color primary = Color(0xFF369EFF);
+  static const Color primaryLight = Color(0xFF5BB0FF);
+  static const Color primaryDark = Color(0xFF2680E0);
   static const Color secondary = Color(0xFF272727);
-  static const Color secondaryLight = Color(0xC9346DAE);
-  static const Color accent = Color(
-    0xFFFF8C00,
-  ); // Equifeed orange/amber (feed text, grain)
-  static const Color accentLight = Color(0xFFFFD700); // Golden yellow highlight
-  static const Color primaryBackground = Color(
-    0xFFFFFFFF,
-  ); // White (used throughout app)
-  static const Color secondaryBackground = Color(
-    0xFFFFF8F0,
-  ); // Warm tint (accent background)
+  static const Color secondaryLight = Color(0xFF4B5363);
+  static const Color accent = Color(0xFF369EFF);
+  static const Color accentLight = Color(0xFF5BB0FF);
+  static const Color primaryBackground = Color(0xFFFFFFFF);
+  static const Color secondaryBackground = Color(0xFFF5F5F5);
 
   // Dashboard Specific Colors
-  static const Color dashboardAppbarBackground = Color(0xFF2E8B57);
+  static const Color dashboardAppbarBackground = Color(0xFF369EFF);
 
-  // Text colors
-  static const Color textPrimary = Color(
-    0xFF222A3D,
-  ); // Theme Nightingale Gray 80
-  static const Color textSecondary = Color(
-    0xFF4B5363,
-  ); // Theme Nightingale Gray 60
-  static const Color textDarkPrimary = Color(
-    0xFFFFFFFF,
-  ); // Theme Nightingale Gray White
-  static const Color textDarkSecondary = Color(
-    0xFFD1D5DB,
-  ); // Theme Nightingale Gray 30
+  // Text colors (reference: dark grey for headings/input, light grey for placeholders/inactive)
+  static const Color textPrimary = Color(0xFF333333);
+  static const Color textSecondary = Color(0xFF4B5363);
+  static const Color textDarkPrimary = Color(0xFFFFFFFF);
+  static const Color textDarkSecondary = Color(0xFFD1D5DB);
   static const Color textWhite = Colors.white;
+  static const Color placeholderInactive = Color(0xFFAAAAAA);
 
-  static const Color disabledTextLight = Color(
-    0xFFD1D5DB,
-  ); // Theme Nightingale Gray 30
-  static const Color disabledBackgroundLight = Color(
-    0xFFF3F4F6,
-  ); // Theme Nightingale Gray ?
+  static const Color disabledTextLight = Color(0xFF333333);
+  static const Color disabledBackgroundLight = Color(0xFFEEEEEE);
 
-  static const Color disabledTextDark =
-      textSecondary; // Theme Nightingale Gray 60
-  static const Color disabledBackgroundDark = Color(
-    0xFF222A3D,
-  ); // Theme Nightingale Gray 80
+  static const Color disabledTextDark = textSecondary;
+  static const Color disabledBackgroundDark = Color(0xFF222A3D);
 
   // Background colors
   static const Color lightBackground = Color(0xFFFFFFFF);
-  static const Color darkBackground = Color(
-    0xFF02040A,
-  ); // Theme Nightingale Gray 100
+  static const Color darkBackground = Color(0xFF02040A);
 
-  // Background Container colors
-  static const Color lightContainer = Color(
-    0xFFF3F4F6,
-  ); // Theme Nightingale Gray 10
-  static const Color darkContainer = Color(
-    0xFF13192B,
-  ); // Theme Nightingale Gray 90
-  static const Color cardBackgroundColor = Color(
-    0xFFF7F5F1,
-  ); // Theme Nightingale Gray 90
+  // Input field / inactive (light grey border and bg)
+  static const Color lightContainer = Color(0xFFF5F5F5);
+  static const Color darkContainer = Color(0xFF13192B);
+  static const Color cardBackgroundColor = Color(0xFFF7F5F1);
 
   // Button colors
   static const Color buttonPrimary = primary;
   static const Color buttonSecondary = secondary;
-  static const Color buttonDisabled = disabledBackgroundLight;
+  static const Color buttonDisabled = Color(0xFFEEEEEE);
+  static const Color buttonDisabledText = Color(0xFF333333);
 
   // -- Social Button Colors
   static const Color googleBackgroundColor = Color(0xFFDFEFFF);
@@ -85,19 +54,11 @@ class MyColors {
   static const Color onBoardingPage2Color = Color(0xfffddcdf);
   static const Color onBoardingPage3Color = Color(0xffffdcbd);
 
-  // Icon colors
-  static const Color iconPrimaryLight = Color(
-    0xFF284C76,
-  ); // Theme Nightingale Gray 80
-  static const Color iconSecondaryLight = Color(
-    0xFF9CA3AF,
-  ); // Theme Nightingale Gray 40
-  static const Color iconPrimaryDark = Color(
-    0xFFFFFFFF,
-  ); // Theme Nightingale Gray White
-  static const Color iconSecondaryDark = Color(
-    0xFF9CA3AF,
-  ); // Theme Nightingale Gray 40
+  // Icon colors (inactive = grey; active/filled = primary blue)
+  static const Color iconPrimaryLight = Color(0xFF369EFF);
+  static const Color iconSecondaryLight = Color(0xFFAAAAAA);
+  static const Color iconPrimaryDark = Color(0xFFFFFFFF);
+  static const Color iconSecondaryDark = Color(0xFF9CA3AF);
 
   // Border colors
   static const Color borderPrimary = primary;

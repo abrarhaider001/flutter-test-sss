@@ -12,8 +12,7 @@ class MyElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
       elevation: 0,
       foregroundColor: MyColors.white,
-      backgroundColor: MyColors.dark,
-      side: const BorderSide(color: MyColors.primary),
+      backgroundColor: MyColors.primary,
       padding: const EdgeInsets.symmetric(vertical: MySizes.buttonHeight),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(MySizes.borderRadiusLg),

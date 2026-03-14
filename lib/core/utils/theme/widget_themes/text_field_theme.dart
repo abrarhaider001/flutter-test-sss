@@ -6,24 +6,26 @@ class MyTextFormFieldTheme {
   MyTextFormFieldTheme._();
 
   static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
-    prefixIconColor: MyColors.textSecondary,
+    prefixIconColor: MyColors.iconSecondaryLight,
     floatingLabelStyle: const TextStyle(color: MyColors.primary),
+    fillColor: MyColors.lightContainer,
+    filled: true,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(MySizes.borderRadiusMd),
-      borderSide: const BorderSide(width: 1, color: MyColors.grey10),
+      borderSide: const BorderSide(width: 1, color: MyColors.lightContainer),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(MySizes.borderRadiusMd),
-      borderSide: const BorderSide(width: 1, color: MyColors.grey10),
+      borderSide: const BorderSide(width: 1, color: MyColors.lightContainer),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(MySizes.borderRadiusMd),
-      borderSide: const BorderSide(width: 1, color: MyColors.grey10),
+      borderSide: const BorderSide(width: 1, color: MyColors.lightContainer),
     ),
-    hintStyle: TextStyle(color: MyColors.grey.withOpacity(0.5)),
+    hintStyle: const TextStyle(color: MyColors.placeholderInactive),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(MySizes.borderRadiusMd),
-      borderSide: const BorderSide(width: 2, color: MyColors.primary),
+      borderSide: const BorderSide(width: 1, color: MyColors.lightContainer),
     ),
   );
 

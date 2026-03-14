@@ -1,9 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:sss/core/utils/constants/colors.dart';
+import 'dart:async';
 
-/// Simple splash screen shown at app launch.
-class SplashScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sss/core/utils/constants/colors.dart';
+import 'package:sss/core/utils/constants/sizes.dart';
+import 'package:sss/core/utils/constants/image_strings.dart';
+import 'package:sss/core/routes/app_routes.dart';
+
+/// Splash screen: shows logo, then navigates to signin after 2 seconds.
+/// Flow: splash → signin → signup.
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(const Duration(seconds: 2), () {
+      if (mounted) context.go(AppRoutes.signin);
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +41,20 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'SSS',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: MyColors.primary,
-                fontWeight: FontWeight.bold,
+            Image.asset(
+              MyImages.sssLogo,
+              height: 120,
+              width: 120,
+              fit: BoxFit.contain,
+              errorBuilder: (_, __, ___) => Text(
+                'SSS',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: MyColors.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
             ),
+            const SizedBox(height: MySizes.xl),
           ],
         ),
       ),
