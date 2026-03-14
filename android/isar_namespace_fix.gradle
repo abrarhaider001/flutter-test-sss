@@ -1,0 +1,12 @@
+// Fix for isar_flutter_libs: AGP 8+ requires namespace in library build.gradle
+// Applied from build.gradle.kts; uses Groovy for beforeProject Closure compatibility.
+gradle.beforeProject { proj ->
+    if (proj.name == "isar_flutter_libs") {
+        proj.afterEvaluate {
+            def ext = proj.extensions.findByName("android")
+            if (ext != null) {
+                ext.namespace = "dev.isar.isar_flutter_libs"
+            }
+        }
+    }
+}
