@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:sss/core/network/dio_client.dart';
 import 'package:sss/core/database/isar_storage.dart';
+import 'package:sss/core/services/auth_service.dart';
 
 // ——— Dio (Networking) ———
 final dioProvider = Provider<Dio>((ref) => createDio());
@@ -22,6 +23,13 @@ final firestoreProvider = Provider<FirebaseFirestore>(
 final firebaseStorageProvider = Provider<FirebaseStorage>(
   (ref) => FirebaseStorage.instance,
 );
+
+final authServiceProvider = Provider<AuthService>((ref) {
+  return AuthService(
+    auth: ref.watch(firebaseAuthProvider),
+    firestore: ref.watch(firestoreProvider),
+  );
+});
 
 // ——— Isar (Local DB) ———
 /// Provides [IsarStorage]. On web, Isar is not supported so this throws if used.

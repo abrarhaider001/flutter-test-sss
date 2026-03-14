@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,8 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:sss/core/routes/app_routes.dart';
 import 'package:sss/core/utils/constants/colors.dart';
 import 'package:sss/core/utils/constants/sizes.dart';
+import 'package:sss/core/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:sss/core/widgets/labeled_icon_text_field.dart';
-import 'package:sss/view_models/auth/signup_form_provider.dart';
+import 'package:sss/view_models/auth/signup_controller.dart';
+import 'package:sss/core/providers/signup_form_provider.dart';
 
 /// Signup (Welcome) screen: Email/Phone tabs, E-mail, Username, Birthday, Password.
 /// MVVM: View only; state from [signupFormProvider] in view_models.
@@ -198,9 +201,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 child: ElevatedButton(
                   onPressed:
                       form.allRequiredFilled
-                          ? () {
-                            /* TODO: navigate to next step or call auth */
-                          }
+                          ? () => _handleSignup(context)
                           : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
@@ -243,6 +244,24 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleSignup(BuildContext context) async {
+    final form = ref.read(signupFormProvider);
+    final controller = ref.read(signupControllerProvider);
+    try {
+      await controller.signUp(form);
+      if (!context.mounted) return;
+      context.go(AppRoutes.signin);
+    } on FirebaseAuthException catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(MyFirebaseAuthException(e.code).message),
+          backgroundColor: Colors.red.shade700,
+        ),
+      );
+    }
   }
 }
 

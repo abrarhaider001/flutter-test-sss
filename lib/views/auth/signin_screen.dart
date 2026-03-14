@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +6,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sss/core/routes/app_routes.dart';
 import 'package:sss/core/utils/constants/colors.dart';
 import 'package:sss/core/utils/constants/sizes.dart';
+import 'package:sss/core/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:sss/core/widgets/labeled_icon_text_field.dart';
-import 'package:sss/view_models/auth/signin_form_provider.dart';
+import 'package:sss/view_models/auth/signin_controller.dart';
+import 'package:sss/core/providers/signin_form_provider.dart';
 
 /// Sign-in screen: same UI design as signup (Email/Phone tabs, Email, Password).
 /// MVVM: View only; state from [signinFormProvider] in view_models.
@@ -117,9 +120,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                 child: ElevatedButton(
                   onPressed:
                       form.allRequiredFilled
-                          ? () {
-                            /* TODO: sign in */
-                          }
+                          ? () => _handleSignin(context)
                           : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
@@ -162,6 +163,24 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleSignin(BuildContext context) async {
+    final form = ref.read(signinFormProvider);
+    final controller = ref.read(signinControllerProvider);
+    try {
+      await controller.signIn(form);
+      if (!context.mounted) return;
+      context.go(AppRoutes.splash);
+    } on FirebaseAuthException catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(MyFirebaseAuthException(e.code).message),
+          backgroundColor: Colors.red.shade700,
+        ),
+      );
+    }
   }
 }
 
