@@ -5,6 +5,10 @@ import 'package:sss/core/utils/local_storage/storage_utility.dart';
 import 'package:sss/core/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
+import 'firebase_options.dart';
 
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -32,7 +36,20 @@ void showAppSnackbar({
 }
 
 Future<void> main() async {
+  final logger = Logger();
+  // firebase initialization
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp();
+    if (kDebugMode) {
+      logger.d("Firebase initialized!!");
+    }
+  }
 
   await MyLocalStorage.init('app');
   runApp(const MyApp());

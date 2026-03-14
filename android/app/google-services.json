@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093406630735",
+    "project_id": "flutter-test-sss",
+    "storage_bucket": "flutter-test-sss.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093406630735:android:a01692d52f00fcba229b3a",
+        "android_client_info": {
+          "package_name": "com.sss.main"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy3uRN6HW0i1UB6zEHhjucrt5koibj9mQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
