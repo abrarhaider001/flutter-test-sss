@@ -1,12 +1,11 @@
-import 'package:sss/core/routes/app_pages.dart';
-import 'package:sss/core/routes/app_routes.dart';
+import 'package:sss/core/routes/app_router.dart';
 import 'package:sss/core/utils/constants/colors.dart';
-import 'package:sss/core/utils/local_storage/storage_utility.dart';
 import 'package:sss/core/utils/theme/theme.dart';
+import 'package:sss/core/database/isar_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'firebase_options.dart';
 
@@ -37,9 +36,9 @@ void showAppSnackbar({
 
 Future<void> main() async {
   final logger = Logger();
-  // firebase initialization
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Firebase (Auth + Firestore + Storage)
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -47,12 +46,18 @@ Future<void> main() async {
   } else {
     await Firebase.initializeApp();
     if (kDebugMode) {
-      logger.d("Firebase initialized!!");
+      logger.d("Firebase initialized");
     }
   }
 
-  await MyLocalStorage.init('app');
-  runApp(const MyApp());
+  // Local DB (Isar) – not supported on web
+  await IsarStorage.init();
+
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -60,7 +65,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp.router(
       scaffoldMessengerKey: rootScaffoldMessengerKey,
       debugShowCheckedModeBanner: false,
       title: 'SSS',
@@ -71,8 +76,7 @@ class MyApp extends StatelessWidget {
           selectionHandleColor: MyColors.primary,
         ),
       ),
-      initialRoute: AppRoutes.splash,
-      getPages: AppPages.pages,
+      routerConfig: AppRouter.router,
     );
   }
 }

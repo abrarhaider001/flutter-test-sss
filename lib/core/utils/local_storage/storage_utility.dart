@@ -1,44 +1,56 @@
-import 'package:get_storage/get_storage.dart';
+import 'package:sss/core/database/isar_storage.dart';
 
+/// Key-value storage backed by Isar (local DB). On web, operations no-op or return null.
+/// Prefer using [IsarStorage] and [isarStorageProvider] directly with Riverpod.
 class MyLocalStorage {
-  late final GetStorage _storage;
-
-  // Singleton instance
-  static MyLocalStorage? _instance;
-
   MyLocalStorage._internal();
 
-  /// Create a named constructor to obtain an instance with a specific bucket name
+  static bool _initialized = false;
+
   factory MyLocalStorage.instance() {
-    _instance ??= MyLocalStorage._internal();
-    return _instance!;
+    if (!_initialized) {
+      throw StateError(
+        'MyLocalStorage not initialized. Call MyLocalStorage.init() first.',
+      );
+    }
+    return MyLocalStorage._internal();
   }
 
-  /// Asynchronous initialization method
   static Future<void> init(String bucketName) async {
-    // Very Important when you want to use Bucket's
-    await GetStorage.init(bucketName);
-    _instance = MyLocalStorage._internal();
-    _instance!._storage = GetStorage(bucketName);
+    await IsarStorage.init();
+    _initialized = true;
   }
 
-  /// Generic method to save data
+  IsarStorage? get _storage => IsarStorage.instance;
+
   Future<void> writeData<T>(String key, T value) async {
-    await _storage.write(key, value);
+    final s = _storage;
+    if (s == null) return;
+    if (value is String) {
+      await s.writeString(key, value);
+    } else if (value is int) {
+      await s.writeInt(key, value);
+    } else if (value is bool) {
+      await s.writeBool(key, value);
+    } else {
+      await s.writeString(key, value.toString());
+    }
   }
 
-  /// Generic method to read data
   T? readData<T>(String key) {
-    return _storage.read<T>(key);
+    final s = _storage;
+    if (s == null) return null;
+    if (T == String) return s.readString(key) as T?;
+    if (T == int) return s.readInt(key) as T?;
+    if (T == bool) return s.readBool(key) as T?;
+    return s.readString(key) as T?;
   }
 
-  /// Generic method to remove data
   Future<void> removeData(String key) async {
-    await _storage.remove(key);
+    await _storage?.remove(key);
   }
 
-  /// Clear all data in storage
   Future<void> clearAll() async {
-    await _storage.erase();
+    await _storage?.clearAll();
   }
 }
