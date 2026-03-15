@@ -22,12 +22,12 @@ class HomeChoiceChips extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeOutCubic,
-      height: expanded ? 48 : 0,
+      height: expanded ? 80 : 0,
       decoration: const BoxDecoration(),
       clipBehavior: Clip.hardEdge,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: MySizes.md, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: MySizes.md, vertical: 14),
         child: Row(
           children: List.generate(_labels.length, (index) {
             final isSelected = selectedIndex == index;
@@ -40,12 +40,13 @@ class HomeChoiceChips extends StatelessWidget {
                   onTap: () => onChipSelected(index),
                   borderRadius: BorderRadius.circular(999),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                     child: Text(
                       _labels[index],
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
+                        height: 1.25,
                         color: isSelected ? MyColors.textWhite : MyColors.textPrimary,
                       ),
                     ),

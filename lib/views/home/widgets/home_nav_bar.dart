@@ -3,15 +3,18 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sss/core/utils/constants/colors.dart';
 
 /// Bottom navigation: Shop, Cart, Profile (Shop selected by default on home).
+/// When [transparent] is true, background is transparent to increase content area.
 class HomeNavBar extends StatelessWidget {
   const HomeNavBar({
     super.key,
     required this.currentIndex,
     required this.onTap,
+    this.transparent = false,
   });
 
   final int currentIndex;
   final ValueChanged<int> onTap;
+  final bool transparent;
 
   static const List<({String label, IconData icon})> _items = [
     (label: 'Shop', icon: Iconsax.bag_2),
@@ -21,16 +24,19 @@ class HomeNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
+        color: transparent ? Colors.transparent : Colors.white,
+        boxShadow: transparent
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.06),
+                  blurRadius: 8,
+                  offset: const Offset(0, -2),
+                ),
+              ],
       ),
       child: SafeArea(
         top: false,

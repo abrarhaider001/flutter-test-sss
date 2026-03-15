@@ -33,11 +33,11 @@ class HomeProductGrid extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.72,
+                      aspectRatio: 1.0,
                       child: _ProductCard(
                         imagePath: MyImages.productNikeShoes,
-                        title: "Men's Sneakers White One",
-                        price: 'RM 200.00',
+                        title: "Box Fit Minecraft Tee",
+                        price: 'R4 999.99',
                         brandLogoPath: MyImages.brandNike,
                       ),
                     ),
@@ -45,11 +45,11 @@ class HomeProductGrid extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.72,
+                      aspectRatio: 1.0,
                       child: _ProductCard(
                         imagePath: MyImages.productShirt,
-                        title: "Men's T-shirt Black",
-                        price: 'RM 99.00',
+                        title: "Box Fit Minecraft Tee",
+                        price: 'R4 999.99',
                         brandLogoPath: MyImages.brandZara,
                       ),
                     ),
@@ -62,11 +62,11 @@ class HomeProductGrid extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.72,
+                      aspectRatio: 1.0,
                       child: _ProductCard(
                         imagePath: MyImages.productTshirtYellow,
-                        title: 'Outdoor Jacket',
-                        price: 'RM 180.00',
+                        title: 'Colour Between...',
+                        price: 'R16 999.99',
                         brandLogoPath: MyImages.brandNike,
                       ),
                     ),
@@ -74,11 +74,11 @@ class HomeProductGrid extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.72,
+                      aspectRatio: 1.0,
                       child: _ProductCard(
                         imagePath: MyImages.productNikeShoes,
-                        title: "Women's Sneakers One",
-                        price: 'RM 200.00',
+                        title: 'A-H-D Oversized Tee',
+                        price: 'R899.99',
                         brandLogoPath: MyImages.brandApple,
                       ),
                     ),
@@ -140,6 +140,16 @@ class HomeProductGrid extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 12),
+              AspectRatio(
+                aspectRatio: 1.35,
+                child: _ProductCard(
+                  imagePath: MyImages.productTshirtBlueBack,
+                  title: 'The Essential Crewneck Tee',
+                  price: 'RM 120.00',
+                  brandLogoPath: MyImages.brandNike,
+                ),
               ),
               const SizedBox(height: 12),
               Row(
