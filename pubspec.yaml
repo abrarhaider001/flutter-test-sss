@@ -89,8 +89,8 @@ flutter:
   assets:
     - assets/logos/
     - assets/images/
-    # - assets/icons/brands/
-    # - assets/images/profile/
+    - assets/images/brands/
+    - assets/images/products/
     # - assets/images/dashboard/
     # - assets/images/splash_images/
     # - assets/images/welcome_images/

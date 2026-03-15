@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sss/core/routes/app_routes.dart';
 import 'package:sss/views/auth/signin_screen.dart';
 import 'package:sss/views/auth/signup_screen.dart';
+import 'package:sss/views/home/home_screen.dart';
 import 'package:sss/views/splash_screen.dart';
 
 /// App route paths (match [AppRoutes] for consistency).
@@ -31,6 +32,12 @@ final class AppRouter {
         name: 'signup',
         builder: (BuildContext context, GoRouterState state) =>
             const SignupScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.home,
+        name: 'home',
+        builder: (BuildContext context, GoRouterState state) =>
+            const HomeScreen(),
       ),
     ],
   );

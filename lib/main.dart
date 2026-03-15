@@ -53,11 +53,7 @@ Future<void> main() async {
   // Local DB (Isar) – not supported on web
   await IsarStorage.init();
 
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

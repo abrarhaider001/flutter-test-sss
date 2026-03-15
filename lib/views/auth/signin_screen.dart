@@ -171,7 +171,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
     try {
       await controller.signIn(form);
       if (!context.mounted) return;
-      context.go(AppRoutes.splash);
+      context.go(AppRoutes.home);
     } on FirebaseAuthException catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
