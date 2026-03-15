@@ -1,9 +1,12 @@
+import 'dart:ui' as ui;
+
 import 'package:sss/core/routes/app_router.dart';
 import 'package:sss/core/utils/constants/colors.dart';
 import 'package:sss/core/utils/theme/theme.dart';
 import 'package:sss/core/database/isar_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -48,6 +51,16 @@ Future<void> main() async {
     if (kDebugMode) {
       logger.d("Firebase initialized");
     }
+    // Crashlytics: aim for ≥99.7% crash-free sessions (not supported on web)
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.presentError(details);
+      FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    };
+    ui.PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
   }
 
   // Local DB (Isar) – not supported on web
